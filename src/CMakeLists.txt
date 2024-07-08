@@ -1,6 +1,8 @@
 option (BUILD_SGX "Build SGX adapter." OFF)
 option (BUILD_TDX "Build TDX adapter." OFF)
 
+PKG_SEARCH_MODULE( JANSSON jansson )
+
 add_subdirectory(connector)
 add_subdirectory(token_provider)
 add_subdirectory(token_verifier)

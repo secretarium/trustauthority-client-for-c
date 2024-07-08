@@ -13,4 +13,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ../../include
 )
 
+target_include_directories (${PROJECT_NAME} PRIVATE
+    ${SSL_LIBRARY_INCLUDE_DIR}
+    ${jansson_SOURCE_DIR}/src
+    ${jansson_SOURCE_DIR}/android
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
 target_link_libraries(${PROJECT_NAME} PUBLIC trustauthority_connector)

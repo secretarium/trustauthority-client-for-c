@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 
 project(trustauthority_connector)
 
-execute_process (
-    COMMAND sudo apt-get install -y libjansson-dev libgnutls28-dev
-    COMMAND bash -c "git clone https://github.com/benmcollins/libjwt.git && cd libjwt && git checkout v1.17.0 && autoreconf -i && ./configure --without-openssl && make all && sudo make install"
+# execute_process (
+#     COMMAND sudo apt-get install -y libjansson-dev libgnutls28-dev
+#     COMMAND bash -c "git clone https://github.com/benmcollins/libjwt.git && cd libjwt && git checkout v1.17.0 && autoreconf -i && ./configure --without-openssl && make all && sudo make install"
 
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    OUTPUT_VARIABLE outVar
-)
+#     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#     OUTPUT_VARIABLE outVar
+# )
 
 add_library(${PROJECT_NAME}
     connector.c 
@@ -22,4 +22,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ../../include
 )
 
+target_include_directories (${PROJECT_NAME} PRIVATE
+    ${SSL_LIBRARY_INCLUDE_DIR}
+    ${jansson_SOURCE_DIR}/src
+    ${jansson_SOURCE_DIR}/android
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
 target_link_libraries(${PROJECT_NAME} PUBLIC jansson jwt crypto curl)
