@@ -6,7 +6,10 @@ add_library(${PROJECT_NAME}
     token_provider.c
 )
 
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+    PRIVATE
     ../../include
 )
 
